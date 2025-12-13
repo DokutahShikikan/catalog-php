@@ -5,13 +5,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 function db(): PgSql\Connection {
   static $c = null;
   if ($c) return $c;
-var_dump([
-'DB_HOST' => getenv('DB_HOST'),
-'DB_PORT' => getenv('DB_PORT'),
-'DB_NAME' => getenv('DB_NAME'),
-'DB_USER' => getenv('DB_USER'),
-]);
-exit;
 $c = pg_connect(sprintf(
     "host=%s port=%s dbname=%s user=%s password=%s sslmode=require",
     getenv('DB_HOST'),
