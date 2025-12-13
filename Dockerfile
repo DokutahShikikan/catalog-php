@@ -1,7 +1,9 @@
-FROM php:8.4-fpm
-RUN apt-get update && apt-get install -y \
-    zlib1g-dev \
-    libzip-dev \
-    libpq-dev \
-    unzip
-RUN docker-php-ext-install zip pdo pdo_pgsql pgsql
+FROM php:8.2-cli
+
+WORKDIR /app
+
+COPY www/ /app
+
+EXPOSE 8080
+
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "/app"]
