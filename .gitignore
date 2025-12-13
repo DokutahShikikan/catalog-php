@@ -1,0 +1,10 @@
+<<<<<<< HEAD
+.env
+vendor
+node_modules
+*.log
+=======
+pgdata/
+.webprogram.vpp.lck
+webprogram.vpp*
+>>>>>>> e90617f (Инициализация)

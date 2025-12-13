@@ -1,0 +1,20 @@
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "5450:80"
+    volumes:
+      - ./build/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./www:/app/www
+  php:
+    build: ./build/php
+    volumes:
+      - ./www:/app/www
+  postgresql:
+    image: postgres
+    ports:
+      - "4424:5432"
+    environment:
+      POSTGRES_USER: useradmin
+      POSTGRES_PASSWORD: 5531
+      POSTGRES_DB: bookstore
