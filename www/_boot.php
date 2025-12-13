@@ -5,7 +5,15 @@ if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 function db(): PgSql\Connection {
   static $c = null;
   if ($c) return $c;
-  $c = pg_connect("host=postgresql dbname=bookstore user=useradmin password=5531");
+$c = pg_connect(sprintf(
+    "host=%s port=%s dbname=%s user=%s password=%s sslmode=require",
+    getenv('DB_HOST'),
+    getenv('DB_PORT'),
+    getenv('DB_NAME'),
+    getenv('DB_USER'),
+    getenv('DB_PASSWORD')
+));
+
   if (!$c) { http_response_code(500); exit('DB connect error'); }
   pg_query($c, "SET client_encoding TO 'UTF8'");
   return $c;
