@@ -7,14 +7,12 @@ $conn = db();
 $selectedAuthorId = isset($_GET['author']) ? (int)$_GET['author'] : null;
 $search = trim($_GET['q'] ?? '');
 
-/* ---------- ЖАНРЫ ---------- */
 $genres = [];
 $r = pg_query($conn, "SELECT id, name FROM genre ORDER BY id ASC");
 while ($row = pg_fetch_assoc($r)) {
     $genres[] = $row;
 }
 
-/* ---------- АВТОРЫ ---------- */
 $authors = [];
 $r = pg_query($conn, "
     SELECT id, first_name, last_name, country, birth_date, death_date, short_description
@@ -25,7 +23,6 @@ while ($row = pg_fetch_assoc($r)) {
     $authors[] = $row;
 }
 
-/* ---------- КОЛ-ВО КНИГ У АВТОРОВ ---------- */
 function getBookCountsByAuthor(PgSql\Connection $conn): array {
     $res = pg_query($conn, "SELECT author_id, COUNT(*) AS c FROM book GROUP BY author_id");
     $out = [];
@@ -36,7 +33,6 @@ function getBookCountsByAuthor(PgSql\Connection $conn): array {
 }
 $authorCounts = getBookCountsByAuthor($conn);
 
-/* ---------- КНИГИ АВТОРА ---------- */
 function getBooksByAuthor(PgSql\Connection $conn, int $authorId, string $search = ''): array {
     $params = [$authorId];
     $where = '';
