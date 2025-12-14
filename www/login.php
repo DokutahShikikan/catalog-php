@@ -19,4 +19,7 @@ top_nav('Вход админа'); ?>
   <label class="mt">Пароль</label><input name="pass" type="password" required>
   <button class="mt">Войти</button>
 </form>
+<a href="/vk_login.php">
+  <button type="button">Войти через VK</button>
+</a>
 <?php bottom_nav(); ?>
