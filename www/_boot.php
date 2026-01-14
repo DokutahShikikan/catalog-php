@@ -34,20 +34,7 @@ function ensure_admin_table(PgSql\Connection $c): void {
   if (!pg_query($c, $sql)) { http_response_code(500); exit('DB error: '.pg_last_error($c)); }
 }
 
-function cache_get(string $key, int $ttl, callable $fn) {
-  $dir = __DIR__ . '/_cache';
-  if (!is_dir($dir)) @mkdir($dir, 0777, true);
-  $file = $dir . '/' . md5($key) . '.json';
 
-  if (is_file($file) && (time() - filemtime($file) < $ttl)) {
-    $data = json_decode((string)file_get_contents($file), true);
-    if ($data !== null) return $data;
-  }
-
-  $data = $fn();
-  file_put_contents($file, json_encode($data, JSON_UNESCAPED_UNICODE));
-  return $data;
-}
 
 
 function top_nav(string $title = 'Админ'): void {
