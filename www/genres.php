@@ -2,14 +2,14 @@
 declare(strict_types=1);
 require __DIR__.'/_boot.php'; $conn = db();
 
-$conn = pg_connect(sprintf(
-    "host=%s port=%s dbname=%s user=%s password=%s sslmode=require",
-    getenv('DB_HOST'),
-    getenv('DB_PORT'),
-    getenv('DB_NAME'),
-    getenv('DB_USER'),
-    getenv('DB_PASSWORD')
-));
+//$conn = pg_connect(sprintf(
+//    "host=%s port=%s dbname=%s user=%s password=%s sslmode=require",
+//    getenv('DB_HOST'),
+//    getenv('DB_PORT'),
+//    getenv('DB_NAME'),
+//    getenv('DB_USER'),
+//    getenv('DB_PASSWORD')
+//));
 
 if (!$conn) { http_response_code(500); echo "Не удалось подключиться к БД."; exit; }
 pg_query($conn, "SET client_encoding TO 'UTF8'");
